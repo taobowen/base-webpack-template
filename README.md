@@ -1,2 +1,9 @@
 # base_webpack_template
-基础webpack模板，致力于兼容typescript、ES6+、vue、react等各种文件
+webpack5模板
+- 兼容typescript、ES6+
+- 适配vue、react
+- 支持本地代理
+- 支持开发模式和生产模式分离配置
+- 支持源码映射
+
+## 开发中ing...
