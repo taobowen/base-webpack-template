@@ -1,12 +1,14 @@
 {
   "name": "webpack-demo",
+  "sideEffects": false,
   "version": "1.0.0",
   "description": "",
   "private": true,
   "scripts": {
     "start": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "dev": "http-server dist"
+    "dev": "http-server dist",
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "",
