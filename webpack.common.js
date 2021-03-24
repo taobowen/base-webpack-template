@@ -1,25 +1,41 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract')
 
 module.exports = {
+  // entry: ['react-hot-loader/patch', './src/react/index.js'],
   entry: {
-    app: './src/index.js',
+    app: './src/react/index.js',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
         include: path.resolve(__dirname, 'src'),
-        options: {
-          transpileOnly: true,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          },
         },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "babel-loader",
+        options: { presets: ["@babel/env"] }
       },
       {
         test: /\.css$/i,
         include: path.resolve(__dirname, 'src'),
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader'
+        ]
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -37,23 +53,20 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
     new HtmlWebpackPlugin({
-      title: 'manage_output',
+      title: 'webpack_demo',
+      template: 'public/index.html'
     }),
   ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
     clean: true,
-    pathinfo: false
+    pathinfo: false,
+    publicPath: '/',
   },
   optimization: {
     moduleIds: 'deterministic',
